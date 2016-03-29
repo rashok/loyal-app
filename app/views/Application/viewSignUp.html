@@ -1,0 +1,86 @@
+#{extends 'main.html' /}
+
+<form class="form-horizontal" id="formid">
+    <fieldset>
+
+        <!-- Form Name -->
+        <legend>Sign Up</legend>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">Name</label>
+            <div class="col-md-4">
+                <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md">
+
+            </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="textinput">E-Mail</label>
+            <div class="col-md-4">
+                <input id="email" name="textinput" type="text" placeholder="" class="form-control input-md">
+
+            </div>
+        </div>
+
+        <!-- Multiple Radios -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="radios">Sign Up for Rewards</label>
+            <div class="col-md-4">
+                <div class="radio">
+                    <label for="radios-0">
+                        <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
+                        Yes
+                    </label>
+                </div>
+                <div class="radio">
+                    <label for="radios-1">
+                        <input type="radio" name="radios" id="radios-1" value="2">
+                        No
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Button (Double) -->
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="button1id"></label>
+            <div class="col-md-8">
+                <button id="button1id" name="button1id" class="btn btn-success">Sign Up</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>
+
+<script>
+    $(function() {
+
+        $('#formid').bind('submit', function(event) {
+            event.preventDefault();
+            var str = jQuery.trim($('#email').val());
+            $.ajax( {
+                url: '@{Application.signup()}',
+                type:'POST',
+                data: {
+                    email : str
+                },
+                beforeSend: function(){
+
+                },
+                success: function(data) {
+                    console.log (data);
+
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            }).done(function () {
+
+            });
+
+        });
+    });
+</script>
+
